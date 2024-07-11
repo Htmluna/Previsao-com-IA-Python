@@ -10,28 +10,32 @@ Este projeto tem como objetivo desenvolver um modelo de **Inteligência Artifici
 
 Para iniciar o projeto, é necessário importar a base de dados dos clientes do banco.
 
+``` python
 import pandas as pd
 
 tabela = pd.read_csv("clientes.csv")
+```
 
 #### Passo 2 - Preparar a base de dados para a IA
 
 Neste passo, realizamos o pré-processamento dos dados para que a IA possa entender. Isso inclui codificar colunas de texto em números utilizando o `LabelEncoder` do scikit-learn.
 
+``` python
 from sklearn.preprocessing import LabelEncoder
 
 codificador = LabelEncoder()
 
 # Exemplo de codificação para coluna 'profissao'
 tabela["profissao"] = codificador.fit_transform(tabela["profissao"])
+```
 
 #### Passo 3 - Criar um modelo de IA
 
 Foram utilizados dois modelos diferentes para treinar a IA: **RandomForest** e **K-Nearest Neighbors (KNN)**.
 
+``` python
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
-
 # Criando modelos
 modelo_arvoredecisao = RandomForestClassifier()
 modelo_knn = KNeighborsClassifier()
@@ -39,11 +43,13 @@ modelo_knn = KNeighborsClassifier()
 # Treinando os modelos
 modelo_arvoredecisao.fit(x_treino, y_treino)
 modelo_knn.fit(x_treino, y_treino)
+```
 
 #### Passo 4 - Escolher o melhor modelo
 
 Neste passo, comparamos a precisão dos modelos treinados para escolher o melhor.
 
+``` python
 from sklearn.metrics import accuracy_score
 
 # Fazendo previsões e calculando a precisão
@@ -55,6 +61,7 @@ accuracy_knn = accuracy_score(y_teste, previsao_knn)
 
 print(f"Precisão Árvore de Decisão: {accuracy_arvoredecisao:.2f}")
 print(f"Precisão KNN: {accuracy_knn:.2f}")
+```
 
 # Considerações Finais
 
